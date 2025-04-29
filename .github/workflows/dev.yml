@@ -29,4 +29,4 @@ jobs:
       - name: Shorebird Login
         run: |
           export PATH="$HOME/.shorebird/bin:$PATH"
-          shorebird login:ci --auth-token ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
+          shorebird login:ci --provider microsoft
