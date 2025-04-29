@@ -23,7 +23,6 @@ jobs:
 
       - name: Shorebird Login
         run: |
-          echo "Logging into Shorebird..."
-          shorebird login --provider microsoft --auth-token ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
-        env:
-          SHOREBIRD_AUTH_TOKEN: ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
+         echo "Logging into Shorebird CI..."
+         export SHOREBIRD_AUTH_TOKEN=${{ secrets.SHOREBIRD_AUTH_TOKEN }}
+         shorebird login:ci --provider microsoft
