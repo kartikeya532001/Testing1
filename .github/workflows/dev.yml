@@ -23,5 +23,7 @@ jobs:
 
       - name: Shorebird Login
         run: |
-          export PATH="$HOME/.shorebird/bin:$PATH"
-          shorebird login:ci --auth-token ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
+          echo "Logging into Shorebird..."
+          shorebird login --provider microsoft --auth-token ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
+        env:
+          SHOREBIRD_AUTH_TOKEN: ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
