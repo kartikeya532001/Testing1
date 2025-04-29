@@ -13,12 +13,12 @@ jobs:
 
       - name: Install Shorebird CLI
         run: |
-            mkdir -p $HOME/.shorebird
-            curl -L https://download.shorebird.dev/releases/latest/shorebird-linux-x64.tar.gz -o shorebird.tar.gz
-            tar -xzf shorebird.tar.gz -C $HOME/.shorebird
-            chmod +x $HOME/.shorebird/shorebird
-            echo "$HOME/.shorebird" >> $GITHUB_PATH
-            "$HOME/.shorebird/shorebird" --version
+          mkdir -p $HOME/.shorebird
+          curl -sL https://api.shorebird.dev/download/latest/linux-x64 -o $HOME/.shorebird/shorebird
+          chmod +x $HOME/.shorebird/shorebird
+          echo "$HOME/.shorebird" >> $GITHUB_PATH
+          $HOME/.shorebird/shorebird --version
+
 
       - name: Shorebird Login
         run: |
