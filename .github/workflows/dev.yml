@@ -28,4 +28,5 @@ jobs:
 
       - name: Shorebird Login
         run: |
-            "$HOME/.shorebird/shorebird" login --auth-token ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
+          export PATH="$HOME/.shorebird/bin:$PATH"
+          shorebird login --auth-token ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
