@@ -1,0 +1,25 @@
+name: Build and Release Web + Android
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  hosting:
+    name: Deploy Web and Android
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Shorebird CLI
+        run: |
+            mkdir -p $HOME/.shorebird
+            curl -L https://download.shorebird.dev/releases/latest/shorebird-linux-x64.tar.gz -o shorebird.tar.gz
+            tar -xzf shorebird.tar.gz -C $HOME/.shorebird
+            chmod +x $HOME/.shorebird/shorebird
+            echo "$HOME/.shorebird" >> $GITHUB_PATH
+            "$HOME/.shorebird/shorebird" --version
+
+      - name: Shorebird Login
+        run: |
+            "$HOME/.shorebird/shorebird" login --auth-token ${{ secrets.SHOREBIRD_AUTH_TOKEN }}
