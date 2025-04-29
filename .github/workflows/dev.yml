@@ -10,23 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Shorebird CLI (Manual)
+      - name: Install Shorebird CLI manually
         run: |
-          mkdir -p $HOME/.shorebird/bin
-          curl -L "https://api.shorebird.dev/download/latest/linux-x64" -o $HOME/.shorebird/bin/shorebird
-          ls
-          chmod +x $HOME/.shorebird/bin/shorebird
+          # Clone Shorebird CLI (stable branch)
+          git clone -b stable https://github.com/shorebirdtech/shorebird.git $HOME/.shorebird
       
-          # Validate installation
-          if [ -x "$HOME/.shorebird/bin/shorebird" ]; then
-            echo "✅ Shorebird CLI downloaded successfully."
-          else
-            echo "❌ Shorebird CLI download failed."
-            exit 1
-          fi
-      
+          # Add the Shorebird bin directory to the PATH
           echo "$HOME/.shorebird/bin" >> $GITHUB_PATH
           echo "export PATH=$HOME/.shorebird/bin:$PATH" >> $GITHUB_ENV
+
+      - name: Check Shorebird Version
+        run: |
           export PATH="$HOME/.shorebird/bin:$PATH"
           shorebird --version
 
