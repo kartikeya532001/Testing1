@@ -13,11 +13,20 @@ jobs:
 
       - name: Install Shorebird CLI
         run: |
-          mkdir -p $HOME/.shorebird
-          curl -sL https://api.shorebird.dev/download/latest/linux-x64 -o $HOME/.shorebird/shorebird
-          chmod +x $HOME/.shorebird/shorebird
-          echo "$HOME/.shorebird" >> $GITHUB_PATH
-          $HOME/.shorebird/shorebird --version
+          curl -Ls https://get.shorebird.dev | bash
+      
+          if [ -x "$HOME/.shorebird/bin/shorebird" ]; then
+            echo "✅ Shorebird CLI installed successfully."
+          else
+            echo "❌ Shorebird CLI installation failed."
+            exit 1
+          fi
+      
+          echo "$HOME/.shorebird/bin" >> $GITHUB_PATH
+          echo "export PATH=$HOME/.shorebird/bin:$PATH" >> $GITHUB_ENV
+          export PATH="$HOME/.shorebird/bin:$PATH"
+          shorebird --version
+
 
 
       - name: Shorebird Login
