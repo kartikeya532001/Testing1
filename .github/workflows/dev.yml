@@ -13,8 +13,7 @@ jobs:
 
       - name: Install Shorebird CLI
         run: |
-          curl -Ls https://get.shorebird.dev | bash
-      
+          git clone -b stable https://github.com/shorebirdtech/shorebird.git      
           if [ -x "$HOME/.shorebird/bin/shorebird" ]; then
             echo "✅ Shorebird CLI installed successfully."
           else
